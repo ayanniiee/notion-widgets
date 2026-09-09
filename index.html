@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Seoul KST — Cat Clock</title>
+<style>
+:root{
+  color-scheme:light dark;
+  --bg:#080a10; --panel:#0d1018; --text:#f4c9dc; --muted:#c4a9ba;
+  --line:#d98bb0; --soft:#241521; --cat:#efafd0;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#fff8fc; --panel:#fffafd; --text:#17131a; --muted:#6f5c69;
+    --line:#b87999; --soft:#f8e8f1; --cat:#2b2228;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:transparent;font-family:"Courier New",monospace}
+.widget{
+ width:100%; max-width:900px; margin:auto; padding:14px;
+ border:1.5px solid var(--line); border-radius:14px;
+ background:var(--bg); color:var(--text);
+}
+.inner{
+ min-height:260px; display:grid; grid-template-columns:minmax(0,1.35fr) minmax(240px,.8fr);
+ gap:10px; align-items:center; padding:18px 22px;
+ border:1px solid color-mix(in srgb,var(--line) 55%,transparent);
+ border-radius:9px; background:var(--panel); overflow:hidden;
+}
+.left{padding-left:10px;border-left:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.label{font-size:12px;letter-spacing:.18em;color:var(--muted);margin-bottom:12px}
+.time{font-size:clamp(45px,8vw,76px);font-weight:700;letter-spacing:.025em;line-height:1}
+.sec{font-size:.32em;vertical-align:22%;opacity:.72}
+.date{font-size:clamp(12px,2vw,16px);margin-top:14px;color:var(--muted);letter-spacing:.06em}
+.motto{display:flex;gap:16px;margin-top:22px;font-size:clamp(12px,1.8vw,16px);line-height:1.55;color:var(--muted)}
+.note{font-size:30px;color:var(--text)}
+.catbox{height:230px;position:relative;display:flex;align-items:center;justify-content:center}
+.cat{width:min(270px,100%);height:auto;overflow:visible}
+.cat *{vector-effect:non-scaling-stroke}
+.spark{fill:none;stroke:var(--cat);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.catline{fill:none;stroke:var(--cat);stroke-width:3;stroke-linecap:square;stroke-linejoin:miter}
+.catfill{fill:var(--cat)}
+.footer{margin-top:8px;text-align:right;font-size:9px;letter-spacing:.15em;color:var(--muted)}
+@media(max-width:620px){
+ .inner{grid-template-columns:1fr;padding:16px;min-height:0}
+ .catbox{height:190px}
+ .left{padding-left:8px}
+ .footer{text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="widget">
+<div class="inner">
+<section class="left" aria-label="Seoul current time">
+<div class="label">SEOUL <span>✦</span> KST / UTC+9</div>
+<div class="time" id="time">--:--<span class="sec">:-- --</span></div>
+<div class="date" id="date">Loading...</div>
+<div class="motto"><span class="note">♪</span><span>same girl<br>higher standards<br>more peace<br>more of what matters.</span></div>
+</section>
+<div class="catbox" aria-label="Cute pixel cat illustration">
+<svg class="cat" viewBox="0 0 280 250" role="img" aria-label="sparkly cute cat">
+ <g class="spark">
+  <path d="M34 62h22M45 51v22M39 56l12 12M51 56L39 68"/>
+  <path d="M235 42h18M244 33v18M239 37l10 10M249 37l-10 10"/>
+  <path d="M222 91h12M228 85v12"/>
+  <path d="M67 148h18M76 139v18M71 143l10 10M81 143l-10 10"/>
+  <path d="M203 136c5-8 12-8 17 0-5-3-10-3-17 0Z"/>
+  <path d="M238 161c-9-10-20 2 0 16 20-14 9-26 0-16Z"/>
+ </g>
+ <g class="catline">
+  <path d="M83 207c-8-27-12-54-9-91l6-72 50 37 42-3 43-34 5 72c3 42-1 66-10 91"/>
+  <path d="M74 126c7 29 20 42 42 48M210 126c-7 29-20 42-42 48"/>
+  <path d="M106 110q9-8 18 0M160 110q9-8 18 0"/>
+  <path d="M126 133q8 7 16 0"/>
+  <path d="M132 133l-6 9M132 133l6 9"/>
+  <path d="M132 149c-13 2-20 8-26 16M132 149c13 2 20 8 26 16"/>
+  <path d="M96 138l-24-5M96 146l-26 3M168 138l24-5M168 146l26 3"/>
+  <path d="M101 176c-5 18-2 30 7 39M163 176c5 18 2 30-7 39"/>
+ </g>
+ <g class="catfill">
+  <path d="M105 108h10v7h-10zM165 108h10v7h-10z"/>
+  <path d="M127 131h10v7h-10z"/>
+  <path d="M115 87h6v6h-6zM157 87h6v6h-6z"/>
+ </g>
+</svg>
+</div>
+</div>
+<div class="footer">AUTOMATIC THEME <span>♡</span> DARK / LIGHT</div>
+</div>
+<script>
+(function(){
+ const t=document.getElementById("time"),d=document.getElementById("date");
+ function update(){
+  const parts=new Intl.DateTimeFormat("en-US",{
+   timeZone:"Asia/Seoul",hour:"2-digit",minute:"2-digit",second:"2-digit",
+   hour12:true,weekday:"short",month:"short",day:"numeric",year:"numeric"
+  }).formatToParts(new Date());
+  const p={}; parts.forEach(x=>{if(x.type!=="literal")p[x.type]=x.value});
+  t.innerHTML=p.hour+":"+p.minute+'<span class="sec">:'+p.second+" "+p.dayPeriod+"</span>";
+  d.textContent=p.weekday+", "+p.month+" "+p.day+", "+p.year+"  |  SEOUL";
+ }
+ update(); setInterval(update,1000);
+})();
+</script>
+</body>
+</html>
