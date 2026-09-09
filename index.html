@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Seoul KST Pixel Clock</title>
-<!--
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Seoul KST Pixel Clock</title>
+    <!--
 EDIT NOTES
 1. CAT PHOTO: replace the div marked "REPLACE CAT IMAGE HERE" with:
    <img class="cat-photo" src="my-cat.jpg" alt="My cat">
@@ -16,110 +16,260 @@ EDIT NOTES
 4. DARK/LIGHT: follows the device/browser theme automatically.
 5. NOTION: host this publicly (e.g. GitHub Pages), then use /embed.
 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double+Ink:wght@100..900&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Delius&family=Fira+Code:wght@300..700&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<style>
-:root{
- --widget-max-width:700px; --widget-padding:8px; --cat-size:135px;
- --bg:#090a10;--panel:#0e1119;--text:#f3b9d2;--muted:#c2a8b7;
- --line:#d98caf;--cat-bg:#15121a;--placeholder:#a67e94;--accent:#f1a9ca;
- --pixel-font:"Press Start 2P","Courier New",monospace;
- color-scheme:light dark;
-}
-@media(prefers-color-scheme:light){
- :root{--bg:#fff8fc;--panel:#fffafd;--text:#171219;--muted:#705c69;
- --line:#b97898;--cat-bg:#fff1f7;--placeholder:#8b657a;--accent:#9d5278}
-}
-*{box-sizing:border-box}html,body{margin:0;padding:0;background:transparent}
-body{font-family:var(--pixel-font)}
-.delius-regular {
-  font-family: "Delius", cursive;
-  font-weight: 400;
-  font-style: normal;
-}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double+Ink:wght@100..900&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Delius&family=Fira+Code:wght@300..700&family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --widget-max-width: 700px;
+        --widget-padding: 8px;
+        --cat-size: 135px;
+        --bg: #090a10;
+        --panel: #0e1119;
+        --text: #f3b9d2;
+        --muted: #c2a8b7;
+        --line: #d98caf;
+        --cat-bg: #15121a;
+        --placeholder: #a67e94;
+        --accent: #f1a9ca;
+        --pixel-font: "Press Start 2P", "Courier New", monospace;
+        color-scheme: light dark;
+      }
+      @media (prefers-color-scheme: light) {
+        :root {
+          --bg: #fff8fc;
+          --panel: #fffafd;
+          --text: #171219;
+          --muted: #705c69;
+          --line: #b97898;
+          --cat-bg: #fff1f7;
+          --placeholder: #8b657a;
+          --accent: #9d5278;
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: transparent;
+      }
+      body {
+        font-family: var(--pixel-font);
+      }
+      .delius-regular {
+        font-family: "Delius", cursive;
+        font-weight: 400;
+        font-style: normal;
+      }
 
-.bitcount-prop-double-ink-<uniquifier> {
-  font-family: "Bitcount Prop Double Ink", system-ui;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-  font-variation-settings:
-    "slnt" 0,
-    "CRSV" 0.5,
-    "ELSH" 0,
-    "ELXP" 0,
-    "SZP1" 0,
-    "SZP2" 0,
-    "XPN1" 0,
-    "XPN2" 0,
-    "YPN1" 0,
-    "YPN2" 0;
+      .bitcount-prop-double-ink-<uniquifier > {
+        font-family: "Bitcount Prop Double Ink", system-ui;
+        font-optical-sizing: auto;
+        font-weight: <weight>;
+        font-style: normal;
+        font-variation-settings:
+          "slnt" 0,
+          "CRSV" 0.5,
+          "ELSH" 0,
+          "ELXP" 0,
+          "SZP1" 0,
+          "SZP2" 0,
+          "XPN1" 0,
+          "XPN2" 0,
+          "YPN1" 0,
+          "YPN2" 0;
+      }
+      .widget {
+        width: 55%;
+        max-width: var(--widget-max-width);
+        margin: auto;
+        padding: var(--widget-padding);
+        color: var(--text);
+      }
+   .panel {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 0;
+  border-radius: 9px;
+  background: var(--panel);
+  padding: 13px 15px;
+  min-height: 165px;
 }
-.widget{width:100%;max-width:var(--widget-max-width);margin:auto;padding:var(--widget-padding);color:var(--text)}
-.panel{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(130px,.75fr);
-align-items:center;gap:10px;border-radius:9px;
-background:var(--panel);padding:13px 15px;min-height:165px}
-.label{font-size:8px;line-height:1.5;letter-spacing:.08em;color:var(--muted);margin-bottom:9px}
-.time{font-size:clamp(25px,5vw,44px);line-height:1.15;font-family:bitcount Prop Double Ink;letter-spacing:0;color:var(--text);white-space:nowrap}
-.seconds{font-size:.31em;vertical-align:20%;opacity:.72}
-.date{margin-top:8px;font-size:8px; line-height:1.6;color:var(--muted)}
-.motto{display:flex;gap:9px;margin-top:12px;color:var(--muted);font-size:7px;line-height:1.8}
-.note{color:var(--accent);font-size:16px}
-.cat-area{min-width:0;display:flex;align-items:center;justify-content:center}
-.cat-photo,.cat-placeholder{width:var(--cat-size);height:var(--cat-size);max-width:100%;
-object-fit:cover;border:1px dashed var(--line);border-radius:6px;background:var(--cat-bg)}
-.cat-placeholder{display:flex;align-items:center;justify-content:center;text-align:center;
-color:var(--placeholder);font-size:7px;line-height:1.8;padding:12px}
-.heart{display:block;font-size:16px;margin-bottom:6px;color:var(--accent)}
-.decor{text-align:right;margin-top:5px;color:var(--muted);font-size:6px;letter-spacing:.08em}
-@media(max-width:560px){
- :root{--cat-size:105px}.panel{grid-template-columns:minmax(0,1fr) auto;padding:11px;min-height:140px}
- .left{padding-left:8px}.time{font-size:clamp(21px,8vw,36px)}
- .label,.date,.motto{font-size:6px}.motto{margin-top:7px}
+      .label {
+        font-size: 8px;
+        line-height: 1.5;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin-bottom: 9px;
+      }
+      .time {
+        font-size: clamp(25px, 5vw, 44px);
+        line-height: 1.15;
+        font-family: bitcount Prop Double Ink;
+        letter-spacing: 0;
+        color: var(--text);
+        white-space: nowrap;
+      }
+      .seconds {
+        font-size: 0.31em;
+        vertical-align: 20%;
+        opacity: 0.72;
+      }
+      .date {
+        margin-top: 8px;
+        font-size: 8px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      .motto {
+        display: flex;
+        gap: 9px;
+        margin-top: 12px;
+        color: var(--muted);
+        font-size: 7px;
+        line-height: 1.8;
+      }
+      .note {
+        color: var(--accent);
+        font-size: 16px;
+      }
+    .cat-area {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
-@media(max-width:380px){.panel{grid-template-columns:1fr}.cat-area{justify-content:flex-start}}
-</style>
-</head>
-<body>
-<div class="widget">
- <div class="panel">
-  <section class="left" aria-label="Seoul current time">
-   <div class="label">SEOUL ✦ KST / UTC+9</div>
-   <div class="time" id="time">--:--<span class="seconds">:-- --</span></div>
-   <div class="date" id="date">Loading...</div>
-   <div class="motto"><span class="note">♪</span><span>same girl<br>higher standards<br>more peace<br>more of what matters.</span></div>
-  </section>
-  <section class="cat-area">
-   <!-- REPLACE CAT IMAGE HERE
-   Replace this placeholder with:
-   <img class="cat-photo" src="my-cat.jpg" alt="My cat">
-   For GitHub Pages, upload my-cat.jpg beside index.html.
-   -->
-
-   
-   <img class="cat-photo" src="my-cat.png" alt="My cat">
-   
-  </section>
- </div>
- <div class="decor">a brighter tomorrow nshallah ♡ &nbsp; ✦</div>
-</div>
-<script>
-(function(){
- const t=document.getElementById("time"),d=document.getElementById("date");
- function update(){
-  const parts=new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Seoul",hour:"2-digit",
-   minute:"2-digit",second:"2-digit",hour12:true,weekday:"short",month:"short",
-   day:"numeric",year:"numeric"}).formatToParts(new Date());
-  const p={};parts.forEach(x=>{if(x.type!=="literal")p[x.type]=x.value});
-  t.innerHTML=p.hour+":"+p.minute+'<span class="seconds">:'+p.second+" "+p.dayPeriod+"</span>";
-  d.textContent=p.weekday+", "+p.month+" "+p.day+", "+p.year;
- }
- update();setInterval(update,1000);
-})();
-</script>
-</body>
+      .cat-photo,
+      .cat-placeholder {
+        width: var(--cat-size);
+        height: var(--cat-size);
+        max-width: 100%;
+      }
+      object-fit: cover;
+      border-radius: 6px;
+      .cat-placeholder {
+        display: flex;
+        align-items: center;
+        justify-content:left;
+        text-align: center;
+        color: var(--placeholder);
+        font-size: 7px;
+        line-height: 1.8;
+        padding: 12px;
+      }
+      .heart {
+        display: block;
+        font-size: 16px;
+        margin-bottom: 6px;
+        color: var(--accent);
+      }
+      .decor {
+        text-align: right;
+        margin-top: 5px;
+        color: var(--muted);
+        font-size: 6px;
+        letter-spacing: 0.08em;
+      }
+      @media (max-width: 560px) {
+        :root {
+          --cat-size: 105px;
+        }
+      
+        .left {
+          padding-left: 8px;
+        }
+        .time {
+          font-size: clamp(21px, 8vw, 36px);
+        }
+        .label,
+        .date,
+        .motto {
+          font-size: 6px;
+        }
+        .motto {
+          margin-top: 7px;
+        }
+      }
+      @media (max-width: 380px) {
+        .panel {
+          grid-template-columns: 1fr;
+        }
+        .cat-area {
+          justify-content: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="widget">
+      <div class="panel">
+        <section class="left" aria-label="Seoul current time">
+          <div class="label">SEOUL ✦ KST / UTC+9</div>
+          <div class="time" id="time">
+            --:--<span class="seconds">:-- --</span>
+          </div>
+          <div class="date" id="date">Loading...</div>
+          <div class="motto">
+            <span class="note">♪</span
+            ><span
+              >same girl<br />higher standards<br />more peace<br />more of what
+              matters.</span
+            >
+          </div>
+        </section>
+        <section class="cat-area">
+          <img class="cat-photo" src="my-cat.png" alt="My cat" />
+        </section>
+      </div>
+    </div>
+    <script>
+      (function () {
+        const t = document.getElementById("time"),
+          d = document.getElementById("date");
+        function update() {
+          const parts = new Intl.DateTimeFormat("en-US", {
+            timeZone: "Asia/Seoul",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true,
+            weekday: "short",
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }).formatToParts(new Date());
+          const p = {};
+          parts.forEach((x) => {
+            if (x.type !== "literal") p[x.type] = x.value;
+          });
+          t.innerHTML =
+            p.hour +
+            ":" +
+            p.minute +
+            '<span class="seconds">:' +
+            p.second +
+            " " +
+            p.dayPeriod +
+            "</span>";
+          d.textContent =
+            p.weekday + ", " + p.month + " " + p.day + ", " + p.year;
+        }
+        update();
+        setInterval(update, 1000);
+      })();
+    </script>
+  </body>
 </html>
